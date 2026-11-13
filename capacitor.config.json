@@ -1,0 +1,11 @@
+{
+  "appId": "com.cocktail.assistant",
+  "appName": "鸡尾酒助手",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "cocktail-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "鸡尾酒助手 —— 看手头的酒决定今晚喝哪杯",
+  "scripts": {
+    "sync": "cap sync android",
+    "build:apk": "cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}
