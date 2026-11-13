@@ -4,6 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>鸡尾酒助手</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#100e0c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="鸡尾酒">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" href="icon-192.png">
+  <style>
+    /* 装成应用后铺满屏幕，去掉模拟手机外壳 */
+    html,body{background:#100e0c!important;padding:0!important;margin:0!important}
+    .phone{width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;
+      border-radius:0!important;border:0!important;box-shadow:none!important}
+  </style>
+
 <style>
 
   :root{
@@ -27,7 +42,7 @@
     padding:0 26px;font-size:11.5px;color:#6f655d;letter-spacing:.4px}
   .screen{display:none;flex:1;min-height:0;flex-direction:column}
   .screen.on{display:flex}
-  .body{flex:1;overflow-y:auto;padding:6px 18px 18px;overflow-x:hidden}
+  .body{flex:1;overflow-y:auto;padding:calc(10px + env(safe-area-inset-top,0px)) 16px calc(18px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
   .body::-webkit-scrollbar{width:0}
 
   h1{font-size:23px;font-weight:650;letter-spacing:.4px;margin:8px 0 8px;line-height:1.35}
@@ -38,8 +53,8 @@
     letter-spacing:1.2px;margin:22px 0 10px}
   .sect i{flex:1;height:1px;background:rgba(255,255,255,.05)}
 
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .sp{background:#171310;border:1px solid #2b241e;border-radius:14px;padding:13px 3px 10px;
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .sp{background:#171310;border:1px solid #2b241e;border-radius:14px;padding:13px 3px 10px;min-width:0;
     text-align:center;cursor:pointer;transition:.15s;position:relative}
   .sp:hover{border-color:#463c33}
   .sp .nm{font-size:12px;color:#d3c7ba;line-height:1.25}
@@ -118,6 +133,9 @@
   .cta:disabled{background:#2b241c;color:#5c534a;cursor:default}
   .ghost{width:100%;padding:13px;border-radius:14px;border:1px solid #332b25;background:transparent;
     color:#b6aba0;font-size:12.5px;cursor:pointer;font-family:inherit}
+  /* 真机已有系统状态栏，内嵌的模拟状态条一律隐藏 */
+  .phone .status{display:none}
+  #practice .status{display:none}
 
 #practice :root{--bg:#100e0c;--panel:#191512;--line:#302823;--txt:#f3ece3;--muted:#92877c;
     --amber:#e0aa55;--green:#93a97a}
@@ -293,6 +311,7 @@
 <!-- 1 库存 -->
   <div class="screen on" id="s1">
     <div class="body">
+      <button class="back" onclick="typeof show==='function'&&show('home')">‹ 首页</button>
       <h1>你手头有什么</h1>
       <p class="lede">先勾<b>基酒</b>，再勾<b>手边真有的辅料</b>。默认有水、冰和气泡水；味美思、Campari 这类也勾一下更准。</p>
 
@@ -1329,23 +1348,71 @@ async function start(){
   sendBtn.disabled=false; inp.focus();
 }
 
+
+// ── 待学清单：说到我还没数据的酒，先记下来
+const WISHKEY='wish_v1';
+function wishLoad(){ try{ return JSON.parse(localStorage.getItem(WISHKEY)||'[]'); }catch(e){ return []; } }
+function wishSave(a){ try{ localStorage.setItem(WISHKEY, JSON.stringify(a)); }catch(e){} }
+function wishAdd(name){
+  const n=(name||'').trim().slice(0,40); if(!n) return false;
+  const a=wishLoad(); if(a.some(x=>x.n===n)) return false;
+  a.unshift({n:n,t:Date.now()}); wishSave(a.slice(0,80)); return true;
+}
+async function wishShow(){
+  const a=wishLoad();
+  if(!a.length){ await say('待学清单是空的。说到我还认不出的酒，我会自动记进来。',550); return; }
+  await say(`<b>待学清单</b> · ${a.length} 杯<br><span style="color:#8d8176;font-size:12.5px">这些我还没有参数。点一条可以去掉。</span>`,600);
+  const w=document.createElement('div'); w.className='chips';
+  a.forEach(function(it){
+    const b=document.createElement('div'); b.className='chip'; b.textContent=it.n;
+    b.onclick=function(){
+      const cur=wishLoad().filter(x=>x.n!==it.n); wishSave(cur);
+      b.classList.add('done'); b.textContent=it.n+' ✓';
+      setTimeout(()=>{ wishShow(); },300);
+    };
+    w.appendChild(b);
+  });
+  const cp=document.createElement('div'); cp.className='chip'; cp.textContent='复制清单';
+  cp.onclick=async function(){
+    const txt='待学清单：'+wishLoad().map(function(x){return x.n;}).join('、');
+    try{ await navigator.clipboard.writeText(txt); cp.textContent='已复制 ✓'; }
+    catch(e){
+      cp.textContent='手动复制';
+      await say('<b>复制不了，长按选中这段：</b><br><span style="user-select:all;-webkit-user-select:all">'+txt+'</span>',400);
+    }
+  };
+  w.appendChild(cp);
+  chat.appendChild(w); atBottom();
+}
+
 (async function loop(){
   await start();
   while(true){
     const text=await waitInput();
     if(isLost(text)){ await sleep(250); await routeFlow(); continue; }
+    if(/待学清单|待学|想学清单|我的清单/.test(text)){ await wishShow(); continue; }
     const drink=findDrink(text);
     const p=pain(text);
     await sleep(300);
     if(drink && lastFuzzy) await say(`你是说 <b>${drink.zh}</b>（${drink.en}）吧？我按这个走。`,650);
 
     if(!drink){
-      await say('这杯我得先问一句：<b>你想练哪一杯？</b>说酒名就行。',600);
-      await say('要是还没想好，我可以推荐一杯最值得练的。',450);
-      const pick=await chips([{label:'推荐一杯',value:'rec'},{label:'我再想想',value:'wait'}]);
+      const cleaned=text.replace(/[\s，。,.!！?？]/g,'');
+      if(cleaned.length>=2){
+        const added=wishAdd(text);
+        await say(added
+          ? `「${text}」我还没有这杯的参数，先记进<b>待学清单</b>了。`
+          : `「${text}」已经在待学清单里了。`,600);
+        await say('说「待学清单」可以看全部。要不要先练一杯我这边有数据的？',500);
+      } else {
+        await say('这杯我得先问一句：<b>你想练哪一杯？</b>说酒名就行。',600);
+      }
+      const pick=await chips([{label:'推荐一杯',value:'rec'},{label:'看待学清单',value:'wish'},{label:'我再想想',value:'wait'}]);
       if(pick==='rec'){
         await say('练 <b>Daiquiri</b>。它只有三个材料，做崩了也没有东西可以怪。',700);
         await doDrink(DICT.find(x=>x.id==='daiquiri'),'');
+      } else if(pick==='wish'){
+        await wishShow();
       } else await say('行，想好了随时说。',400);
       continue;
     }
@@ -1474,6 +1541,56 @@ async function doDrink(e,p){
   sendBtn.disabled=false; inp.focus();
 }
 
+</script>
+
+<style>
+#insthint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 86px);
+  z-index:99;background:rgba(28,23,19,.96);border:1px solid rgba(224,170,85,.42);color:#e9bc78;
+  font:600 12px/1 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;padding:11px 16px;border-radius:999px;
+  box-shadow:0 10px 26px rgba(0,0,0,.5);display:none;align-items:center;gap:7px;cursor:pointer;letter-spacing:.2px}
+#insthint.on{display:flex}
+#instsheet{position:fixed;inset:0;z-index:100;background:rgba(10,8,7,.72);display:none;
+  align-items:flex-end;justify-content:center;padding:18px;backdrop-filter:blur(3px)}
+#instsheet.on{display:flex}
+#instsheet .box{width:100%;max-width:360px;background:#191512;border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:20px 18px;color:#f3ece3;font:13px/1.75 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+#instsheet .box h3{margin:0 0 10px;font-size:16px}
+#instsheet .box p{margin:0 0 8px;color:#b6a999}
+#instsheet .box b{color:#e9bc78}
+#instsheet .box button{margin-top:12px;width:100%;padding:12px;border-radius:12px;border:0;
+  background:linear-gradient(180deg,#e6b161,#cf9743);color:#241605;font:600 14px/1 inherit;cursor:pointer}
+</style>
+<div id="insthint">⬇︎ 安装到桌面</div>
+<div id="instsheet"><div class="box">
+  <h3>装到手机桌面</h3>
+  <p><b>安卓 Chrome：</b>点右上角 <b>⋮</b> → 找「安装应用」或「添加到主屏幕」。</p>
+  <p><b>iPhone Safari：</b>点底部「分享」→「添加到主屏幕」。</p>
+  <p>如果没看到「安装应用」，先刷新一次页面，等两三秒再点菜单。</p>
+  <button onclick="document.getElementById('instsheet').classList.remove('on')">知道了</button>
+</div></div>
+<script>
+(function(){
+  var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  var inApp = (location.protocol === 'https:' && location.hostname === 'localhost') || /Capacitor/.test(navigator.userAgent);
+  if (standalone || inApp) return;
+  var hint = document.getElementById('insthint');
+  var sheet = document.getElementById('instsheet');
+  var deferred = null;
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferred = e; hint.classList.add('on'); });
+  setTimeout(function(){ if(!localStorage.getItem('inst_off')) hint.classList.add('on'); }, 1500);
+  hint.addEventListener('click', function(){
+    if (deferred) { deferred.prompt(); deferred = null; hint.classList.remove('on'); return; }
+    sheet.classList.add('on');
+  });
+  sheet.addEventListener('click', function(e){ if(e.target === sheet) sheet.classList.remove('on'); });
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
