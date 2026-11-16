@@ -403,12 +403,12 @@
   <div class="layer" id="ask">
     <div class="c-head">
       <button class="c-back" onclick="show('home')">‹</button>
-      <div><div class="c-t">聊一句</div><div class="c-s">演示版 · 没接模型</div></div>
+      <div><div class="c-t">聊一句</div><div class="c-s">可联网 · 断网用预置</div></div>
     </div>
     <div class="c-body" id="cBody">
       <div class="c-hero">
         <h2>问一杯</h2>
-        <p>发苦、发淡、材料能不能换，都能问。<br>还没接模型，回答是提前写好的几句。</p>
+        <p>发苦、发淡、材料能不能换，都能问。<br>能连模型；没网就退回预置的几句。</p>
       </div>
     </div>
     <div class="c-chips">
@@ -1868,14 +1868,87 @@ async function doDrink(e,p){
     if(/甜/.test(t)) return '甜分两种。入口就甜、后面发腻，是糖多；甜得发紧、咽下去干，是水少。';
     return '在。今天想喝点什么，还是就聊两句？';
   }
+  var DEFAULT_API='https://1533899565-j551geeypn.ap-guangzhou.tencentscf.com/chat';
+  var API=DEFAULT_API, STORED='';
+  try{ STORED=localStorage.getItem('ask_api')||''; }catch(e){}
+  if(STORED==='off'){ API=''; } else if(STORED){ API=STORED; }
+  var DEV=(function(){ var d=''; try{ d=localStorage.getItem('dev')||''; }catch(e){}
+    if(!d){ d='d'+Math.random().toString(36).slice(2,10); try{ localStorage.setItem('dev',d); }catch(e){} } return d; })();
+  var HIST=[];
+  function setApi(u){ API=u; try{ localStorage.setItem('ask_api', u||'off'); }catch(e){} }
+  function dotsOn(){
+    var d=document.createElement('div'); d.className='c-dots';
+    d.innerHTML='<i></i><i></i><i></i>';
+    body.appendChild(d); body.scrollTop=body.scrollHeight; return d;
+  }
   function ask(text){
     if(!text || !text.trim()) return;
-    add('c-u', text.replace(/</g,'&lt;'));
+    var t=text.trim();
+    add('c-u', t.replace(/</g,'&lt;'));
     inp.value='';
-    var dots=document.createElement('div'); dots.className='c-dots';
-    dots.innerHTML='<i></i><i></i><i></i>';
-    body.appendChild(dots); body.scrollTop=body.scrollHeight;
-    setTimeout(function(){ dots.remove(); add('c-m', reply(text)); }, 750);
+    if(t.indexOf('/api')===0){
+      var v=t.slice(4).trim();
+      if(!v || v==='off'){ setApi(''); add('c-m','好，换回预置的。'); }
+      else { setApi(v); add('c-m','记下了。现在走真模型，断网就退回预置。'); }
+      return;
+    }
+    if(!API){
+      var d0=dotsOn();
+      setTimeout(function(){ d0.remove(); add('c-m', reply(t)); }, 750);
+      return;
+    }
+    HIST.push({role:'user',content:t});
+    if(HIST.length>8) HIST=HIST.slice(-8);
+    var b=document.createElement('div'); b.className='c-m'; body.appendChild(b);
+    var d1=dotsOn();
+    var first=true;
+    function typeOut(el, text){
+      return new Promise(function(res){
+        var k=0; el.textContent='';
+        (function tick(){
+          if(k>=text.length){ res(); return; }
+          el.textContent+=text.charAt(k++); body.scrollTop=body.scrollHeight;
+          setTimeout(tick, 16);
+        })();
+      });
+    }
+    function handle(r){
+      var ct=(r.headers.get('content-type')||'');
+      if(ct.indexOf('text/event-stream')<0){
+        return r.text().then(function(txt){
+          var out=txt;
+          try{ var j=JSON.parse(txt); if(j && j.text) out=j.text; if(j && j.error) throw new Error(j.error); }catch(e){ if(e && e.message && e.message!=='Unexpected token') throw e; }
+          if(!out || !out.trim()) throw new Error('empty');
+          d1.remove(); first=false; return typeOut(b, out.trim());
+        });
+      }
+      return r.body.getReader().then(function(rd){
+        var dec=new TextDecoder(), buf='';
+        function pump(){
+          return rd.read().then(function(o){
+            if(o.done){ d1.remove(); if(first){ b.textContent=reply(t); } return; }
+            buf+=dec.decode(o.value,{stream:true});
+            var parts=buf.split('\n\n'); buf=parts.pop();
+            parts.forEach(function(p){
+              p.split('\n').forEach(function(line){
+                if(line.indexOf('data:')!==0) return;
+                var d=line.slice(5).trim();
+                if(!d||d==='[DONE]') return;
+                try{ var j=JSON.parse(d); var c=j.choices&&j.choices[0]&&j.choices[0].delta&&j.choices[0].delta.content;
+                  if(c){ if(first){ d1.remove(); first=false; } b.textContent+=c; body.scrollTop=body.scrollHeight; }
+                }catch(e){}
+              });
+            });
+            return pump();
+          });
+        }
+        return pump();
+      });
+    }
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({device:DEV,messages:HIST})})
+    .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return handle(r); })
+    .catch(function(){ d1.remove(); if(first){ b.textContent=reply(t); b.setAttribute('data-fallback','1'); } });
   }
   send.onclick=function(){ ask(inp.value); };
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); ask(inp.value); } });
