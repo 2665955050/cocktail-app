@@ -873,8 +873,11 @@ function openCard(i){
 }
 
 
+var __backing=false;
+function pushNav(){ if(__backing) return; try{ history.pushState({app:1},''); }catch(e){} }
 function show(id){
   document.querySelectorAll('.layer').forEach(l=>l.classList.toggle('on', l.id===id));
+  pushNav();
 }
 function openDecide(){ show('decide'); go(1); }
 function openPractice(){ show('practice'); }
@@ -899,7 +902,13 @@ function openAsk(){ show('ask'); var i=document.getElementById('cInp'); if(i) se
   window.__handleBack=handleBack;
   try{ history.pushState({app:1},''); }catch(e){}
   window.addEventListener('popstate', function(){
-    if(handleBack()){ try{ history.pushState({app:1},''); }catch(e){} }
+    __backing=true;
+    var ok=false;
+    try{ ok=handleBack(); }catch(e){ ok=false; }
+    setTimeout(function(){
+      __backing=false;
+      if(ok){ try{ history.pushState({app:1},''); }catch(e){} }
+    }, 0);
   });
 })();
 
@@ -2196,7 +2205,7 @@ footer{padding:12px 18px 14px;background:var(--v2-bg);border-top:1px solid var(-
 /* 首页 */
 #home.layer.on{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;text-align:left;gap:14px;padding:22px 18px calc(18px + env(safe-area-inset-bottom,0px));overflow-y:auto}
 .v2-hhead{margin-bottom:2px}
-.v2-hbrand{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;color:var(--v2-t3)}
+.v2-hbrand{background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit;display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;color:var(--v2-t3)}
 .v2-hmark{width:18px;height:18px;color:var(--v2-brand);display:inline-flex}
 .v2-hmark svg,.v2-tile-ico svg,.v2-askbar-ico svg,.v2-tabbar svg,.v2-hero-glass svg{width:100%;height:100%;display:block}
 .v2-hgreet{font-size:12px;color:var(--v2-t3);margin-top:22px}
@@ -2327,7 +2336,7 @@ footer{padding:12px 18px 14px;background:var(--v2-bg);border-top:1px solid var(-
     home.classList.add('v2-home');
     home.innerHTML =
       '<div class="v2-hhead">'+
-        '<div class="v2-hbrand"><span class="v2-hmark">'+I.glass+'</span><span>COCKTAIL ASSISTANT</span></div>'+
+        '<button class="v2-hbrand" type="button" onclick="openMe()" aria-label="打开我的"><span class="v2-hmark">'+I.glass+'</span><span>COCKTAIL ASSISTANT</span></button>'+
       '</div>'+
       '<button class="v2-hero" type="button" onclick="openDecide()">'+
         '<span class="v2-hero-badge">今夜酒单</span>'+
@@ -2342,7 +2351,7 @@ footer{padding:12px 18px 14px;background:var(--v2-bg);border-top:1px solid var(-
         '<button class="v2-tile" type="button" onclick="openLookup()"><span class="v2-tile-ico">'+I.search+'</span><span class="v2-tile-t">解疑</span><span class="v2-tile-d">太甜、没气泡，按症状查</span></button>'+
       '</div>'+
       '<button class="v2-askbar" type="button" onclick="openAsk()"><span class="v2-askbar-ico">'+I.chat+'</span><span class="v2-askbar-txt">问一句：金酒加柠檬，能做什么？</span><span class="v2-askbar-go">↑</span></button>'+
-      '<div class="v2-tip" id="v2Tip">今晚一句 · 先定水，再选冰。</div>'+
+      '<div class="v2-tip" id="v2Tip">今晚一句 · 温度是配料，不是背景。</div>'+
       '<div class="v2-hfoot"><span>离线可用 · 配方与训练记录留在这台设备上</span></div>';
   }
 
@@ -2393,7 +2402,7 @@ footer{padding:12px 18px 14px;background:var(--v2-bg);border-top:1px solid var(-
     var t = e.changedTouches[0];
     var dx = t.clientX - _sx, dy = t.clientY - _sy;
     if(Math.abs(dy) > 60) return;
-    if(!me.classList.contains('on') && _sx < 30 && dx > 50) openMe();
+    if(!me.classList.contains('on') && dx > 80 && Math.abs(dx) > Math.abs(dy) * 1.6) openMe();
     else if(me.classList.contains('on') && dx < -50) closeMe();
   }, {passive:true});
   nav.querySelectorAll('button').forEach(function(b){
