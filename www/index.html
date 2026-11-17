@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>鸡尾酒助手</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#100e0c">
+<title>鸡尾酒助手</title>  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0d0b09">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,7 +13,7 @@
   <link rel="icon" href="icon-192.png">
   <style>
     /* 装成应用后铺满屏幕，去掉模拟手机外壳 */
-    html,body{background:#100e0c!important;padding:0!important;margin:0!important}
+    html,body{background:#0d0b09!important;padding:0!important;margin:0!important}
     .phone{width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;
       border-radius:0!important;border:0!important;box-shadow:none!important}
   </style>
@@ -23,7 +22,7 @@
 
   :root{
     --bg:#100e0c;--panel:#191512;--line:#302823;
-    --txt:#f3ece3;--muted:#92877c;--amber:#e0aa55;--green:#93a97a;
+    --txt:#f3ece3;--muted:#c0b1a1;--amber:#e0aa55;--green:#93a97a;
     --amber-dim:rgba(224,170,85,.12);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -39,7 +38,7 @@
     .phone{width:100vw;height:100vh;border-radius:0;border:0;box-shadow:none}
   }
   .status{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;
-    padding:0 26px;font-size:11.5px;color:#6f655d;letter-spacing:.4px}
+    padding:0 26px;font-size:11.5px;color:#ab9c8c;letter-spacing:.4px}
   .screen{display:none;flex:1;min-height:0;flex-direction:column}
   .screen.on{display:flex}
   .body{flex:1;overflow-y:auto;padding:calc(10px + env(safe-area-inset-top,0px)) 16px calc(18px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
@@ -49,7 +48,7 @@
   .lede{font-size:12.5px;color:var(--muted);line-height:1.8;margin:0 0 6px}
   .lede b{color:#c3b7aa;font-weight:600}
 
-  .sect{display:flex;align-items:baseline;gap:8px;font-size:10.5px;color:#7c7269;
+  .sect{display:flex;align-items:baseline;gap:8px;font-size:10.5px;color:#ab9c8c;
     letter-spacing:1.2px;margin:22px 0 10px}
   .sect i{flex:1;height:1px;background:rgba(255,255,255,.05)}
 
@@ -59,30 +58,30 @@
   .preset:active{background:rgba(224,170,85,.13)}
   .morebtn{display:flex;align-items:center;justify-content:space-between;width:100%;margin:10px 0 2px;padding:11px 14px;
     background:#171310;border:1px dashed #3a3129;border-radius:12px;color:#a7998a;font-size:12px;cursor:pointer;font-family:inherit}
-  .morebtn .ar{transition:.2s;font-size:10px;color:#6f655d}
+  .morebtn .ar{transition:.2s;font-size:10px;color:#ab9c8c}
   .morebtn.open .ar{transform:rotate(180deg)}
   .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
   .sp{background:#171310;border:1px solid #2b241e;border-radius:14px;padding:13px 3px 10px;min-width:0;
     text-align:center;cursor:pointer;transition:.15s;position:relative}
   .sp:hover{border-color:#463c33}
   .sp .nm{font-size:12px;color:#d3c7ba;line-height:1.25}
-  .sp .ct{font-size:9.5px;color:#6f655d;margin-top:5px}
+  .sp .ct{font-size:9.5px;color:#ab9c8c;margin-top:5px}
   .sp.on{border-color:rgba(224,170,85,.75);background:var(--amber-dim)}
   .sp.on .nm{color:#f3ece3}
   .sp.on .ct{color:var(--amber)}
   .sp.aux.on{border-color:rgba(147,169,122,.6);background:rgba(147,169,122,.1)}
   .sp.aux.on .ct{color:var(--green)}
 
-  .hint{font-size:11px;color:#6f655d;margin-top:14px;line-height:1.7}
+  .hint{font-size:11px;color:#ab9c8c;margin-top:14px;line-height:1.7}
 
   .filters{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 14px}
   .chip{font-size:11.5px;padding:7px 12px;border-radius:999px;border:1px solid #342c25;
-    color:#9c9188;cursor:pointer;transition:.15s;background:rgba(255,255,255,.02)}
+    color:#c0b1a1;cursor:pointer;transition:.15s;background:rgba(255,255,255,.02)}
   .chip:hover{border-color:#4a4038}
   .chip.on{background:var(--amber-dim);border-color:rgba(224,170,85,.6);color:#f0c47e;font-weight:600}
 
   .exbar{display:none;align-items:center;justify-content:space-between;gap:10px;font-size:11.5px;
-    color:#8b8078;background:#1c1712;border:1px solid rgba(255,255,255,.05);border-radius:14px;
+    color:#b8a897;background:#1c1712;border:1px solid rgba(255,255,255,.05);border-radius:14px;
     padding:10px 13px;margin-bottom:12px;line-height:1.5}
   .exbar.on{display:flex}
   .exbar .u{color:var(--amber);cursor:pointer;flex:none}
@@ -94,14 +93,14 @@
   .exbar.ask .btn{flex:1;text-align:center;padding:11px;border-radius:11px;
     background:linear-gradient(180deg,#e6b161,#cf9743);color:#241605;font-size:13px;font-weight:600;cursor:pointer}
   .exbar.ask .btn.alt{background:transparent;border:1px solid rgba(224,170,85,.5);color:#e9bc78}
-  .exbar.ask .sub{font-size:10.5px;color:#7c7269;margin-top:10px}
+  .exbar.ask .sub{font-size:10.5px;color:#ab9c8c;margin-top:10px}
 
   .card{background:#1c1712;border:1px solid rgba(255,255,255,.065);border-radius:20px;
     padding:17px 18px 16px;margin-bottom:12px;cursor:pointer;transition:.16s;position:relative}
   .card:hover{border-color:rgba(224,170,85,.3);transform:translateY(-1px)}
   .card.locked{opacity:.72}
   .x{position:absolute;top:11px;right:11px;width:26px;height:26px;border-radius:50%;
-    border:1px solid rgba(255,255,255,.08);color:#6f655d;font-size:11px;display:flex;
+    border:1px solid rgba(255,255,255,.08);color:#ab9c8c;font-size:11px;display:flex;
     align-items:center;justify-content:center;cursor:pointer;transition:.15s;background:transparent;z-index:2}
   .x:hover{border-color:rgba(201,138,90,.6);color:#c98a5a}
   .tagLine{display:inline-block;font-size:10px;color:#e9bc78;border:1px solid rgba(224,170,85,.35);
@@ -110,18 +109,18 @@
   .tagLine.sub{color:#9fb08a;border-color:rgba(147,169,122,.45);background:rgba(147,169,122,.08)}
   .card .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
   .card .tt{min-width:0}
-  .card .zh{font-size:11.5px;color:#8b8078;margin-top:3px;letter-spacing:.02em}
+  .card .zh{font-size:11.5px;color:#b8a897;margin-top:3px;letter-spacing:.02em}
   .card h3{margin:0;font-size:17px;font-weight:650;letter-spacing:.2px}
   .card .meta{font-size:11px;color:var(--muted);flex:none}
   .card .why{font-size:12px;color:#b6aba0;line-height:1.65;margin:8px 0 10px}
   .row{display:flex;gap:9px;font-size:11.5px;line-height:1.55;margin-top:5px}
-  .row .k{color:#6f655d;flex:none;width:26px}
+  .row .k{color:#ab9c8c;flex:none;width:26px}
   .row .v{color:#a99e93;flex:1}
   .row .v.bad{color:#c98a5a}
 
-  .back{border:0;background:none;color:#8b8078;font-size:12.5px;padding:8px 0 2px;cursor:pointer;font-family:inherit}
+  .back{border:0;background:none;color:#b8a897;font-size:12.5px;padding:8px 0 2px;cursor:pointer;font-family:inherit}
   .back:hover{color:var(--amber)}
-  .mini{font-size:11.5px;color:#7c7269;margin:2px 0 18px;letter-spacing:.3px}
+  .mini{font-size:11.5px;color:#ab9c8c;margin:2px 0 18px;letter-spacing:.3px}
   .ings{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
   .ing{font-size:11.5px;color:#cfc4b8;border:1px solid #332b25;border-radius:9px;padding:6px 10px;
     background:rgba(255,255,255,.02);font-variant-numeric:tabular-nums}
@@ -129,7 +128,7 @@
   .steps{margin-top:2px}
   .step{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.045)}
   .step:last-child{border:0}
-  .step .n{width:21px;height:21px;border-radius:50%;border:1px solid #4a4038;color:#8b8078;
+  .step .n{width:21px;height:21px;border-radius:50%;border:1px solid #4a4038;color:#b8a897;
     font-size:10.5px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;
     font-variant-numeric:tabular-nums}
   .step p{margin:0;font-size:12.5px;line-height:1.7;color:#cfc4b8}
@@ -141,14 +140,14 @@
   .cta{width:100%;padding:15px;border-radius:15px;border:0;
     background:linear-gradient(180deg,#e6b161,#cf9743);color:#241605;
     font-size:14.5px;font-weight:650;letter-spacing:.4px;cursor:pointer;font-family:inherit}
-  .cta:disabled{background:#2b241c;color:#5c534a;cursor:default}
+  .cta:disabled{background:#2b241c;color:#9c8e7f;cursor:default}
   .ghost{width:100%;padding:13px;border-radius:14px;border:1px solid #332b25;background:transparent;
     color:#b6aba0;font-size:12.5px;cursor:pointer;font-family:inherit}
   /* 真机已有系统状态栏，内嵌的模拟状态条一律隐藏 */
   .phone .status{display:none}
   #practice .status{display:none}
 
-#practice :root{--bg:#100e0c;--panel:#191512;--line:#302823;--txt:#f3ece3;--muted:#92877c;
+#practice :root{--bg:#100e0c;--panel:#191512;--line:#302823;--txt:#f3ece3;--muted:#c0b1a1;
     --amber:#e0aa55;--green:#93a97a}
 #practice *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 #practice{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
@@ -168,14 +167,14 @@
     display:flex;align-items:center;justify-content:center;font-size:13px;color:#1a1206;font-weight:700;
     box-shadow:0 2px 8px rgba(0,0,0,.35)}
 #practice .who .n{font-size:13.5px;font-weight:600;letter-spacing:.2px}
-#practice .who .s{font-size:11px;color:#7a6f65;margin-top:2px}
+#practice .who .s{font-size:11px;color:#ab9c8c;margin-top:2px}
 #practice .chat{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 14px 8px;min-height:0;scroll-behavior:smooth}
 #practice .chat::-webkit-scrollbar{width:0}
 #practice .hero{padding:4px 3px 20px}
 #practice .hero .ht{font-size:22px;font-weight:600;letter-spacing:.5px;line-height:1.3}
 #practice .hero .hs{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.7}
 #practice .steps{display:flex;gap:10px;margin:20px 0 0;border-top:1px solid rgba(255,255,255,.05);padding-top:15px}
-#practice .steps div{flex:1;font-size:10.5px;color:#6f655d;line-height:1.6}
+#practice .steps div{flex:1;font-size:10.5px;color:#ab9c8c;line-height:1.6}
 #practice .steps b{display:block;color:#968a7e;font-size:11px;margin-bottom:3px;font-weight:600;letter-spacing:.2px}
 #practice .msg{max-width:86%;padding:12px 15px;border-radius:18px;font-size:13.5px;line-height:1.75;margin-bottom:10px;
     white-space:pre-wrap;word-break:break-word;animation:in .22s ease}
@@ -185,14 +184,14 @@
 #practice .msg.wide{max-width:100%}
 #practice .setup{display:flex;flex-direction:column;gap:9px;padding:2px 0}
 #practice .setup .sr{display:flex;gap:10px;font-size:12.5px;line-height:1.6}
-#practice .setup .sk{color:#7a6f65;flex:none;width:30px}
+#practice .setup .sk{color:#ab9c8c;flex:none;width:30px}
 #practice .setup .sv{color:#ddd3c6;flex:1}
 #practice .setup .sv.hl{color:var(--amber);font-variant-numeric:tabular-nums}
 #practice .me{background:linear-gradient(180deg,#e3ae5a,#d09b45);color:#241605;margin-left:auto;
     border-bottom-right-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
-#practice .sys{color:#6f655d;font-size:10.5px;text-align:center;max-width:100%;padding:6px 0;margin:2px 0 10px}
+#practice .sys{color:#ab9c8c;font-size:10.5px;text-align:center;max-width:100%;padding:6px 0;margin:2px 0 10px}
 #practice .typing{display:flex;gap:4px;padding:12px 14px}
-#practice .typing i{width:5px;height:5px;border-radius:50%;background:#7c7269;animation:bl 1s infinite}
+#practice .typing i{width:5px;height:5px;border-radius:50%;background:#ab9c8c;animation:bl 1s infinite}
 #practice .typing i:nth-child(2){animation-delay:.15s}
 #practice .typing i:nth-child(3){animation-delay:.3s}
 @keyframes bl{0%,60%,100%{opacity:.25}30%{opacity:1}}
@@ -207,7 +206,7 @@
 #practice .chip .sub{opacity:.42;font-size:11px;margin-left:5px;letter-spacing:.02em}
 #practice .timerbox{background:#1f1913;border:1px solid rgba(217,164,76,.32);border-radius:16px;padding:12px 14px;
     margin-bottom:10px;max-width:82%}
-#practice .timerbox .l{font-size:10.5px;color:#7c7269;letter-spacing:.8px}
+#practice .timerbox .l{font-size:10.5px;color:#ab9c8c;letter-spacing:.8px}
 #practice .timerbox .row{display:flex;align-items:center;gap:10px;margin-top:6px}
 #practice .timerbox .c{font-variant-numeric:tabular-nums;font-size:24px;color:var(--amber);font-weight:600;flex:1}
 #practice .timerbox button{border:0;border-radius:9px;background:var(--amber);color:#1a1206;font-size:11.5px;
@@ -223,19 +222,19 @@
     color:var(--amber);font-size:15px;line-height:1;cursor:pointer;padding:0 0 2px;display:flex;align-items:center;justify-content:center;flex:none}
 #practice .pback:hover{background:rgba(217,164,76,.12)}
 #practice #ptitle{font-size:12.5px;color:#c7bcae}
-#practice #pcrumb{font-size:10.5px;color:#6f655d;margin-left:auto;font-variant-numeric:tabular-nums}
+#practice #pcrumb{font-size:10.5px;color:#ab9c8c;margin-left:auto;font-variant-numeric:tabular-nums}
 #practice .pkbody{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:10px}
-#practice .pknote{width:100%;font-size:11px;color:#8b8078;line-height:1.6;margin:-2px 0 3px}
+#practice .pknote{width:100%;font-size:11px;color:#b8a897;line-height:1.6;margin:-2px 0 3px}
 #practice .rec{border:1px solid rgba(217,164,76,.3);border-radius:14px;background:#1c1712;margin:4px 0 12px;
     max-width:92%;overflow:hidden;animation:in .2s ease}
 #practice .rechd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px 7px;
     cursor:pointer;font-size:12.5px;color:#e6ddd2}
-#practice .rechd .chev{color:#7c7269;font-size:11px;transition:transform .2s}
+#practice .rechd .chev{color:#ab9c8c;font-size:11px;transition:transform .2s}
 #practice .rec.open .chev{transform:rotate(180deg)}
 #practice .recsub{display:none}
 #practice .recmet{padding:0 13px 12px;display:flex;flex-direction:column;gap:5px}
 #practice .recmet .row{display:flex;gap:8px;font-size:11.5px;line-height:1.55}
-#practice .recmet .k{color:#6f655d;flex:none;width:52px}
+#practice .recmet .k{color:#ab9c8c;flex:none;width:52px}
 #practice .recmet .v{color:#c7bcae}
 #practice .recopen{display:none;border-top:1px solid #2a231d;padding:10px 9px 2px;max-height:420px;overflow-y:auto}
 #practice .rec.open .recopen{display:block}
@@ -245,7 +244,7 @@
 #practice .recopen .chips{margin-bottom:8px}
 #practice .composer input{flex:1;background:#1c1815;border:1px solid #342c26;border-radius:16px;
     color:var(--txt);font-size:14px;padding:12px 15px;outline:none;font-family:inherit;transition:.16s}
-#practice .composer input::placeholder{color:#6b6157}
+#practice .composer input::placeholder{color:#ab9c8c}
 #practice .composer input:focus{border-color:rgba(224,170,85,.5);box-shadow:0 0 0 3px rgba(224,170,85,.08)}
 #practice .send{width:40px;height:40px;border-radius:50%;border:0;background:linear-gradient(180deg,#e6b161,#cf9743);
     color:#241605;font-size:16px;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center;
@@ -259,16 +258,16 @@
 #practice .mbox{width:100%;max-width:390px;margin:0 auto;background:#171310;border:1px solid var(--line);
     border-radius:18px 18px 0 0;padding:16px 16px 20px;max-height:86vh;overflow:auto}
 #practice .mh{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--txt);margin-bottom:12px}
-#practice .mx{border:0;background:transparent;color:#8a7f74;font-size:15px;cursor:pointer}
+#practice .mx{border:0;background:transparent;color:#b8a897;font-size:15px;cursor:pointer}
 #practice #myname{width:100%;background:#1b1714;border:1px solid var(--line);border-radius:10px;color:var(--txt);
     padding:9px 11px;font-size:13px;font-family:inherit;outline:none}
-#practice .mlabel{font-size:11px;color:#8a7f74;margin:13px 0 7px}
+#practice .mlabel{font-size:11px;color:#b8a897;margin:13px 0 7px}
 #practice .mrow{display:flex;gap:6px;align-items:center;margin-bottom:6px}
 #practice .mrow select{flex:1;background:#1b1714;border:1px solid var(--line);border-radius:9px;color:var(--txt);
     padding:7px;font-size:12px;font-family:inherit}
 #practice .mrow input{width:60px;background:#1b1714;border:1px solid var(--line);border-radius:9px;color:var(--txt);
     padding:7px;font-size:12px;text-align:right;font-family:inherit}
-#practice .mrow .del{border:0;background:transparent;color:#7a6f66;cursor:pointer;font-size:14px;padding:0 2px}
+#practice .mrow .del{border:0;background:transparent;color:#ab9c8c;cursor:pointer;font-size:14px;padding:0 2px}
 #practice .madd{width:100%;border:1px dashed var(--line);background:transparent;color:var(--amber);
     border-radius:9px;padding:7px;font-size:12px;cursor:pointer;margin-top:2px}
 #practice .mgoal{font-size:12px;color:var(--amber);background:rgba(217,164,76,.08);
@@ -279,31 +278,31 @@
   .layer{display:none;flex:1;min-height:0;flex-direction:column}
   .layer.on{display:flex}
   #home{justify-content:center;align-items:center;text-align:center;gap:14px;padding:0 22px}
-  #home .brand{font-size:11.5px;color:#8b8078;letter-spacing:3px;margin-bottom:6px}
+  #home .brand{font-size:11.5px;color:#b8a897;letter-spacing:3px;margin-bottom:6px}
   .hcard{width:100%;background:#171310;border:1px solid rgba(255,255,255,.065);border-radius:20px;padding:18px 20px;
     text-align:left;cursor:pointer;transition:.16s;box-shadow:0 10px 26px rgba(0,0,0,.22)}
   .hcard:hover{border-color:rgba(224,170,85,.45);transform:translateY(-2px)}
   .hcard .t{font-size:17px;font-weight:650;margin-bottom:7px;letter-spacing:.2px}
-  .hcard .d{font-size:12.5px;color:#9a8e83;line-height:1.7}
-  .hcard .m{margin-top:10px;font-size:10px;color:#7a6f66;letter-spacing:.8px}
+  .hcard .d{font-size:12.5px;color:#c0b1a1;line-height:1.7}
+  .hcard .m{margin-top:10px;font-size:10px;color:#ab9c8c;letter-spacing:.8px}
   #ask{background:var(--bg);min-height:0}
   #ask .c-head{display:flex;align-items:center;gap:10px;padding:14px 14px 10px;flex:none}
   #ask .c-back{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.1);
     background:transparent;color:#d8c9b3;font-size:16px;line-height:1;cursor:pointer;flex:none}
   #ask .c-t{font-size:14.5px;font-weight:650;letter-spacing:.3px}
-  #ask .c-s{font-size:10.5px;color:#7d7267;margin-top:2px;letter-spacing:.2px}
+  #ask .c-s{font-size:10.5px;color:#ab9c8c;margin-top:2px;letter-spacing:.2px}
   #ask .c-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 16px 8px;display:flex;flex-direction:column;gap:9px}
   #ask .c-hero{padding:26px 2px 10px}
   #ask .c-hero h2{font-size:21px;margin:0 0 8px;letter-spacing:.2px}
-  #ask .c-hero p{font-size:12.5px;color:#8b8078;line-height:1.75;margin:0}
+  #ask .c-hero p{font-size:12.5px;color:#b8a897;line-height:1.75;margin:0}
   #ask .c-m{max-width:88%;align-self:flex-start;background:#1b1714;border:1px solid #2e2721;
     border-radius:14px 14px 14px 4px;padding:11px 13px;font-size:13px;line-height:1.75;color:#e8ded2}
   #ask .c-u{max-width:88%;align-self:flex-end;background:linear-gradient(180deg,#e6b161,#cf9743);
     color:#241605;border-radius:14px 14px 4px 14px;padding:11px 13px;font-size:13px;line-height:1.7;font-weight:550}
-  #ask .c-tip{font-size:11px;color:#7d7267;align-self:flex-start;padding:2px 4px;line-height:1.7}
+  #ask .c-tip{font-size:11px;color:#ab9c8c;align-self:flex-start;padding:2px 4px;line-height:1.7}
   #ask .c-dots{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:#1b1714;
     border:1px solid #2e2721;border-radius:14px}
-  #ask .c-dots i{width:4px;height:4px;border-radius:50%;background:#8b8078;animation:cblink 1s infinite}
+  #ask .c-dots i{width:4px;height:4px;border-radius:50%;background:#b8a897;animation:cblink 1s infinite}
   #ask .c-dots i:nth-child(2){animation-delay:.15s}
   #ask .c-dots i:nth-child(3){animation-delay:.3s}
   @keyframes cblink{0%,80%,100%{opacity:.25}40%{opacity:1}}
@@ -318,7 +317,7 @@
   #ask .c-compose input:focus{border-color:rgba(224,170,85,.55);box-shadow:0 0 0 3px rgba(224,170,85,.09)}
   #ask .c-send{width:40px;height:40px;flex:none;border:0;border-radius:50%;background:linear-gradient(180deg,#e6b161,#cf9743);
     color:#241605;font-size:17px;cursor:pointer}
-  #ask .c-send:disabled{background:#2b241c;color:#5c534a;cursor:default}
+  #ask .c-send:disabled{background:#2b241c;color:#9c8e7f;cursor:default}
   #practice{position:relative;min-height:0;background:var(--bg)}
   #practice .back{display:none}
   #practice .exit{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;
@@ -338,25 +337,25 @@
   #lookup .c-back{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.1);
     background:transparent;color:#cbbcaa;font-size:17px;line-height:1;cursor:pointer;flex:none}
   #lookup .c-t{font-size:14px;font-weight:650}
-  #lookup .c-s{font-size:10.5px;color:#7d7267;margin-top:2px}
+  #lookup .c-s{font-size:10.5px;color:#ab9c8c;margin-top:2px}
   #lookup .l-body{flex:1;overflow-y:auto;padding:4px 16px 8px;display:flex;flex-direction:column;gap:10px}
   #lookup .c-hero{padding:24px 2px 8px}
   #lookup .c-hero h2{font-size:21px;margin:0 0 8px}
-  #lookup .c-hero p{font-size:12.5px;color:#8b8078;line-height:1.75;margin:0}
+  #lookup .c-hero p{font-size:12.5px;color:#b8a897;line-height:1.75;margin:0}
   #lookup .sym{background:rgba(224,170,85,.06);border:1px solid rgba(224,170,85,.35);border-radius:14px;
     padding:13px 14px}
   #lookup .sym .n{font-size:13px;font-weight:650;color:#ecc17f}
   #lookup .sym .l{font-size:12.5px;color:#e2d6c6;line-height:1.75;margin-top:6px}
-  #lookup .sym .f{font-size:10.5px;color:#8b8078;margin-top:8px;letter-spacing:.3px}
+  #lookup .sym .f{font-size:10.5px;color:#b8a897;margin-top:8px;letter-spacing:.3px}
   #lookup .cs{background:#171310;border:1px solid #2b241e;border-radius:14px;padding:12px 14px;cursor:pointer;
     transition:.15s}
   #lookup .cs:hover{border-color:rgba(224,170,85,.45)}
   #lookup .cs .h{display:flex;align-items:baseline;gap:8px}
   #lookup .cs .no{font-size:10.5px;color:#e0aa55;letter-spacing:.6px;font-variant-numeric:tabular-nums}
   #lookup .cs .t{font-size:13px;font-weight:620;flex:1}
-  #lookup .cs .c{font-size:9.5px;color:#6f655d;border:1px solid #332b25;border-radius:999px;padding:2px 7px}
+  #lookup .cs .c{font-size:9.5px;color:#ab9c8c;border:1px solid #332b25;border-radius:999px;padding:2px 7px}
   #lookup .cs .s{font-size:12px;color:#a99c8d;line-height:1.7;margin-top:6px}
-  #lookup .cs .x{font-size:10px;color:#6f655d;margin-top:7px;display:none}
+  #lookup .cs .x{font-size:10px;color:#ab9c8c;margin-top:7px;display:none}
   #lookup .cs.open .x{display:block}
   #lookup .l-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 16px 2px;flex:none}
   #lookup .l-chip{border:1px solid #3a3129;background:rgba(224,170,85,.05);color:#cbbcaa;
@@ -403,21 +402,21 @@
   <div class="layer" id="ask">
     <div class="c-head">
       <button class="c-back" onclick="show('home')">‹</button>
-      <div><div class="c-t">聊一句</div><div class="c-s">可联网 · 断网用预置</div></div>
+      <div><div class="c-t">聊一句</div><div class="c-s">问酒、问做法都行</div></div>
     </div>
     <div class="c-body" id="cBody">
       <div class="c-hero">
         <h2>问一杯</h2>
-        <p>发苦、发淡、材料能不能换，都能问。<br>能连模型；没网就退回预置的几句。</p>
+        <p>想喝点什么、手头这些能做什么、这杯怎么改，边聊边想。<br>能连模型；没网就退回预置的几句。</p>
       </div>
     </div>
     <div class="c-chips">
-      <div class="c-chip">这杯为什么发苦？</div>
-      <div class="c-chip">青柠能换成柠檬吗？</div>
-      <div class="c-chip">摇多久算够？</div>
+      <div class="c-chip">金酒加柠檬能做什么？</div>
+      <div class="c-chip">帮我把这杯改干一点</div>
+      <div class="c-chip">只有三样，能凑一杯吗</div>
     </div>
     <div class="c-compose">
-      <input id="cInp" placeholder="比如：这杯为什么发苦？" autocomplete="off">
+      <input id="cInp" placeholder="比如：金酒加柠檬能做什么？" autocomplete="off">
       <button class="c-send" id="cSend">↑</button>
     </div>
   </div>
@@ -425,7 +424,7 @@
   <div class="layer" id="lookup">
     <div class="c-head">
       <button class="c-back" onclick="show('home')">‹</button>
-      <div><div class="c-t">解疑</div><div class="c-s">44 条经验 · 离线</div></div>
+      <div><div class="c-t">解疑</div><div class="c-s">按症状查</div></div>
     </div>
     <div class="l-body" id="lBody">
       <div class="c-hero">
@@ -472,7 +471,7 @@
   <!-- 2 三杯 -->
   <div class="screen" id="s2">
     <div class="body">
-      <h1 id="h2">今晚这 3 杯</h1>
+      <h1 id="h2">今晚能做的</h1>
       <p class="lede" id="lede2"></p>
       <div class="filters" id="filters"></div>
       <div class="exbar" id="exbar"></div>
@@ -542,7 +541,7 @@
 <script>
 
 const NAME={gin:'金酒',rum:'白朗姆',bourbon:'波本',rye:'黑麦',vodka:'伏特加',
-  tequila:'龙舌兰',mezcal:'Mezcal',brandy:'白兰地',
+  tequila:'龙舌兰',mezcal:'梅斯卡尔',brandy:'白兰地',
   syrup:'糖浆',lime:'青柠',lemon:'柠檬',bitters:'苦精',
   dryvermouth:'干味美思',sweetvermouth:'红味美思',campari:'Campari',soda:'气泡水',
   triple:'橙味利口',coffee:'咖啡利口',amaretto:'杏仁利口',blue:'蓝橙',
@@ -667,14 +666,14 @@ const SP = {
      ings:['龙舌兰 60 ml','青柠汁 30 ml','龙舌兰糖浆 15 ml'],steps:['杯子先冰一下。','摇壶装冰，倒三样。','摇到起霜，约 12 秒。','滤进冰过的杯子。']}
   ]},
   mezcal:{n:6,cards:[
-    {t:'Mezcal Highball',zh:'梅斯卡尔嗨棒',time:'3 分钟',abv:'10%',tag:'最快',req:['lime','soda'],why:['一口烟，一口凉。'],miss:'无',risk:'苏打太多，烟熏变成灰味。',
-     ings:['Mezcal 40 ml','苏打水 150 ml','青柠角'],steps:['高杯装满冰。','倒 mezcal。','补苏打，挤青柠。']},
-    {t:'Mezcal Sour',zh:'梅斯卡尔酸',time:'6 分钟',abv:'18%',tag:'最保险',req:['lime','syrup'],why:['火被酸浇灭。'],miss:'无',risk:'糖少了，烟熏会发苦。',
-     ings:['Mezcal 55 ml','青柠汁 22 ml','糖浆 18 ml'],steps:['摇壶装满冰。','倒三样，摇到起霜，约 12 秒。','滤进装冰的杯子。']},
+    {t:'梅斯卡尔 Highball',zh:'梅斯卡尔嗨棒',time:'3 分钟',abv:'10%',tag:'最快',req:['lime','soda'],why:['一口烟，一口凉。'],miss:'无',risk:'苏打太多，烟熏变成灰味。',
+     ings:['梅斯卡尔 40 ml','苏打水 150 ml','青柠角'],steps:['高杯装满冰。','倒 mezcal。','补苏打，挤青柠。']},
+    {t:'梅斯卡尔 Sour',zh:'梅斯卡尔酸',time:'6 分钟',abv:'18%',tag:'最保险',req:['lime','syrup'],why:['火被酸浇灭。'],miss:'无',risk:'糖少了，烟熏会发苦。',
+     ings:['梅斯卡尔 55 ml','青柠汁 22 ml','糖浆 18 ml'],steps:['摇壶装满冰。','倒三样，摇到起霜，约 12 秒。','滤进装冰的杯子。']},
     {t:'Naked & Famous',zh:'裸与名',time:'5 分钟',abv:'22%',tag:'最不一样',req:['lime','aperol','chartreuse'],why:['名字比酒还长。'],miss:'缺 Aperol 与 Chartreuse → 不建议替代',risk:'三样都强，比例差 5 ml 就打架。',
-     ings:['Mezcal 30 ml','Aperol 30 ml','黄 Chartreuse 30 ml','青柠汁 20 ml'],steps:['摇壶装满冰。','倒四样，摇到起霜，约 12 秒。','滤进冰过的杯子。']},
+     ings:['梅斯卡尔 30 ml','Aperol 30 ml','黄 Chartreuse 30 ml','青柠汁 20 ml'],steps:['摇壶装满冰。','倒四样，摇到起霜，约 12 秒。','滤进冰过的杯子。']},
     {t:'50/50 Margarita',zh:'五五玛格丽特',time:'4 分钟',abv:'18%',tag:'经典',req:['lime','triple','sherry','agave'],why:['咸的烟，冷的汤。'],miss:'缺雪莉 → 干味美思 30 ml（会少咸味）',risk:'雪莉开瓶太久，只剩酸。',
-     ings:['Mezcal 30 ml','曼萨尼亚雪莉 30 ml','青柠汁 22 ml','橙味利口 15 ml','龙舌兰糖浆 7 ml'],steps:['杯口蘸薄盐（辣椒盐更好）。','摇壶装满冰，倒五样。','摇到起霜，约 12 秒，滤进装了冰的杯子。']}
+     ings:['梅斯卡尔 30 ml','曼萨尼亚雪莉 30 ml','青柠汁 22 ml','橙味利口 15 ml','龙舌兰糖浆 7 ml'],steps:['杯口蘸薄盐（辣椒盐更好）。','摇壶装满冰，倒五样。','摇到起霜，约 12 秒，滤进装了冰的杯子。']}
   ]},
   brandy:{n:7,cards:[
     {t:'Brandy Highball',zh:'白兰地嗨棒',time:'3 分钟',abv:'10%',tag:'最快',req:['soda'],why:['白兰地的白天。'],miss:'无',risk:'冰少，甜味会堆在杯底。',
@@ -700,7 +699,7 @@ const TASTE={'Gin & Tonic':'light','Gimlet':'light','Negroni':'rich',
  'Rye Sour':'mid','Rye Highball':'light','Manhattan':'rich',
  'Vodka Soda':'light','Vodka Gimlet':'light','Cosmopolitan':'mid',
  'Paloma':'light','Tequila Soda':'light','Margarita':'mid',
- 'Toronto':'rich','Little Italy':'rich','Red Hook':'rich','Mezcal Highball':'light','Mezcal Sour':'mid','Naked & Famous':'rich',
+ 'Toronto':'rich','Little Italy':'rich','Red Hook':'rich','梅斯卡尔 Highball':'light','梅斯卡尔 Sour':'mid','Naked & Famous':'rich',
  'Brandy Highball':'light','Sidecar':'mid','Brandy Old Fashioned':'rich'};
 
 const AUX_MAIN=['syrup','lime','lemon','bitters','dryvermouth','sweetvermouth','campari','soda',
@@ -801,7 +800,7 @@ function whyOf(c){ if(Array.isArray(c.why)){ if(!(c.t in _whyCache)) _whyCache[c
 function renderCards(){
   const n=state.sp.size;
   document.getElementById('lede2').textContent =
-    n? `${n} 瓶基酒，${state.aux.size} 样辅料，能做 ${count()} 杯${subCount()?`（${subCount()} 杯要用替代）`:''}，差一样还有 ${near()} 杯。` : '先回去勾一瓶基酒。';
+    n? `${n} 瓶基酒，${state.aux.size} 样辅料，能做 ${count()} 杯${subCount()?`（${subCount()} 杯要用替代）`:''}，差一样还有 ${near()} 杯。` : '勾一瓶基酒就能开始。';
   renderFilters();
   const ex=state.excluded.size, bar=document.getElementById('exbar');
   let html='', ask=false;
@@ -826,16 +825,16 @@ function renderCards(){
       : (sb.length===1 ? `用${NAME[sb[0].have]}代${NAME[sb[0].need]}｜${SUBP[sb[0].need+'>'+sb[0].have]}`
       : sb.length ? `${sb.map(x=>`用${NAME[x.have]}代${NAME[x.need]}`).join('、')}｜${SUBP[sb[0].need+'>'+sb[0].have]}` : c.miss);
     const missTxt = missTxt0==='无' ? '齐了'
-      : missTxt0.indexOf('无（')===0 ? '齐了（'+missTxt0.slice(2) : missTxt0;
+      : missTxt0.indexOf('无（')===0 ? '齐了；'+missTxt0.slice(2,-1) : missTxt0;
     return `<div class="card ${m.length?'locked':''}" data-i="${i}">
       <div class="x" data-x="${c.t}" title="不想要这杯">✕</div>
-      <span class="tagLine ${m.length?'lock':''}">${m.length?'还差一样':c.tag}</span>${sb.length?`<span class="tagLine sub">${sb.length>1?sb.length+' 处替代':'用替代'}</span>`:''}
+      <span class="tagLine ${m.length?'lock':''}">${m.length?('还差'+m.length+'样'):c.tag}</span>${sb.length?`<span class="tagLine sub">${sb.length>1?sb.length+' 处替代':'用替代'}</span>`:''}
       <div class="top"><div class="tt"><h3>${c.t}</h3>${c.zh?`<div class="zh">${c.zh}</div>`:''}</div><div class="meta">${c.time} · ${c.abv}</div></div>
       <div class="why">${whyOf(c)}</div>
-      <div class="row"><span class="k">还差</span><span class="v ${missTxt==='无'?'':'bad'}">${missTxt}</span></div>
+      <div class="row"><span class="k">材料</span><span class="v ${missTxt==='无'?'':'bad'}">${missTxt}</span></div>
       <div class="row"><span class="k">翻车</span><span class="v bad">${c.risk}</span></div>
     </div>`;
-  }).join('') || '<p class="lede">这瓶现在一杯都做不出，换一瓶或勾上辅料。</p>';
+  }).join('') || '<p class="lede">现有材料还配不出完整的一杯。勾一瓶基酒，或者补一样辅料。</p>';
   document.querySelectorAll('#cards .card').forEach(el=>el.onclick=()=>openCard(+el.dataset.i));
   document.querySelectorAll('#cards .x').forEach(el=>el.onclick=e=>{
     e.stopPropagation(); exclude(el.dataset.x);
@@ -882,6 +881,28 @@ function openPractice(){ show('practice'); }
 function openLookup(){ show('lookup'); var i=document.getElementById('lInp'); if(i) setTimeout(function(){i.focus();},120); }
 function openAsk(){ show('ask'); var i=document.getElementById('cInp'); if(i) setTimeout(function(){i.focus();},120); }
 
+(function(){
+  function layerId(){ var l=document.querySelector('.layer.on'); return l?l.id:'home'; }
+  function screenOn(n){ var e=document.getElementById('s'+n); return !!(e&&e.classList.contains('on')); }
+  function pickerOn(){ var p=document.getElementById('picker'); return !!(p&&p.classList.contains('on')); }
+  function handleBack(){
+    if(pickerOn()){ var pb=document.getElementById('pback'); if(pb){ pb.click(); return true; } }
+    var L=layerId();
+    if(L==='decide'){
+      if(screenOn(3)){ go(2); return true; }
+      if(screenOn(2)){ go(1); return true; }
+      show('home'); return true;
+    }
+    if(L!=='home'){ show('home'); return true; }
+    return false;
+  }
+  window.__handleBack=handleBack;
+  try{ history.pushState({app:1},''); }catch(e){}
+  window.addEventListener('popstate', function(){
+    if(handleBack()){ try{ history.pushState({app:1},''); }catch(e){} }
+  });
+})();
+
 function go(n){
   show("decide");
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
@@ -910,7 +931,7 @@ const COCKTAIL_DICT = [
   {id:'gimlet',          en:'Gimlet',             zh:'吉姆雷特',     aliases:['琴蕾'],                              fam:'酸',     base:'金酒'},
   {id:'last-word',       en:'Last Word',          zh:'最后一语',     aliases:['临别一语','遗言'],                    fam:'酸',     base:'金酒'},
   {id:'paper-plane',     en:'Paper Plane',        zh:'纸飞机',       aliases:[],                                    fam:'酸',     base:'波本'},
-  {id:'naked-and-famous',en:'Naked and Famous',   zh:'裸名',         aliases:['赤裸与著名'],                        fam:'酸',     base:'Mezcal'},
+  {id:'naked-and-famous',en:'Naked and Famous',   zh:'裸名',         aliases:['赤裸与著名'],                        fam:'酸',     base:'梅斯卡尔'},
   {id:'penicillin',      en:'Penicillin',         zh:'盘尼西林',     aliases:['青霉素'],                            fam:'酸',     base:'苏格兰威士忌'},
 
   // —— 长饮 ——
@@ -1012,8 +1033,8 @@ const PRACTICE_DATA = {
     plan:'练<b>四种等量的平衡</b>。查特绿一多，整杯就变成药。'},
   'paper-plane': {n:'Paper Plane', goal:'16% / 糖 13 g / 酸 1.6 g / 稀释 25%', ing:'波本 30 ml、阿玛罗 30 ml、Aperol 30 ml、柠檬汁 30 ml', secs:12, verb:'摇',
     plan:'练<b>苦味和酸的比例</b>。四个等量，但每个都可能抢。'},
-  'naked-and-famous': {n:'Naked and Famous', goal:'18% / 糖 12 g / 酸 1.5 g / 稀释 25%', ing:'Mezcal 25 ml、Aperol 25 ml、黄查特 25 ml、青柠汁 25 ml', secs:12, verb:'摇',
-    plan:'练<b>烟熏和苦的叠法</b>。Mezcal 多了就只剩烟。'},
+  'naked-and-famous': {n:'Naked and Famous', goal:'18% / 糖 12 g / 酸 1.5 g / 稀释 25%', ing:'梅斯卡尔 25 ml、Aperol 25 ml、黄查特 25 ml、青柠汁 25 ml', secs:12, verb:'摇',
+    plan:'练<b>烟熏和苦的叠法</b>。梅斯卡尔 多了就只剩烟。'},
   'penicillin': {n:'Penicillin', goal:'17% / 糖 14 g / 酸 1.1 g / 稀释 25%', ing:'苏格兰 60 ml、柠檬汁 20 ml、蜂蜜糖浆 20 ml、姜汁 15 ml', secs:12, verb:'摇',
     plan:'练<b>姜和蜂蜜</b>。姜汁太新会辣，太旧会闷。'},
   'dirty-martini': {n:'Dirty Martini', goal:'26% / 糖 1 g / 酸 0.0 g / 稀释 20%', ing:'金酒 60 ml、干味美思 10 ml、橄榄盐水 15 ml', secs:25, verb:'搅',
@@ -1095,7 +1116,7 @@ const PRACTICE_DATA = {
   'white-negroni': {n:'White Negroni', goal:'22% / 糖 6 g / 酸 0.0 g / 稀释 20%', ing:'金酒 30 ml、Lillet 30 ml、Suze 30 ml', secs:25, verb:'搅',
     plan:'练<b>无色苦精</b>。它比 Campari 轻，苦在后面。'},
   'alaska': {n:'Alaska', goal:'33% / 糖 6 g / 酸 0.0 g / 稀释 20%', ing:'金酒 45 ml、黄查特 15 ml、黑樱桃酒 8 ml', secs:25, verb:'搅',
-    plan:'练<b>草本甜酒的叠法</b>。黄查特多了会像药。'}
+    plan:'练<b>草本甜酒的叠法</b>。黄查特多了会像药。'},
   'cuba-libre': {n:'Cuba Libre', goal:'10% / 糖 13 g / 酸 0.7 g / 稀释 10%', ing:'白朗姆 50 ml、可乐 120 ml、青柠 10 ml', secs:6, verb:'拌',
     plan:'练<b>气泡和糖怎么收尾</b>。可乐本身就是甜的，青柠只负责把它切开。'},
   'whiskey-coke': {n:'Whiskey & Coke', goal:'11% / 糖 13 g / 酸 0.1 g / 稀释 10%', ing:'波本 50 ml、可乐 120 ml', secs:6, verb:'拌',
@@ -1439,7 +1460,7 @@ function openLine(e,p){
 // 每 100 ml：酒精度%、糖 g、酸 g（跟 生成参数.py 的 ING 同源，取常用项）
 const MING={
  '金酒':[44,0,0],'白朗姆':[40,0,0],'黑朗姆':[40,0,0],'波本':[43,0,0],'黑麦':[45,0,0],
- '苏格兰':[43,0,0],'干邑':[40,0,0],'皮斯科':[40,0,0],'龙舌兰':[40,0,0],'伏特加':[40,0,0],'Mezcal':[45,0,0],
+ '苏格兰':[43,0,0],'干邑':[40,0,0],'皮斯科':[40,0,0],'龙舌兰':[40,0,0],'伏特加':[40,0,0],'梅斯卡尔':[45,0,0],
  'Campari':[25,20,0],'Aperol':[11,22,0],'甜味美思':[17,13,0],'干味美思':[15,4,0],
  '橙味利口':[40,25,0],'黑樱桃酒':[32,25,0],'绿查特':[55,20,0],'黄查特':[40,25,0],
  '咖啡利口酒':[20,30,0],'Lillet':[17,10,0],'阿玛罗':[30,20,0],
@@ -1641,7 +1662,7 @@ async function start(){
   });
   chat.appendChild(wrap); atBottom();
   const steps=document.createElement('div'); steps.className='steps';
-  steps.innerHTML='<div><b>① 说一杯</b>酒名，或者解疑</div>'+
+  steps.innerHTML='<div><b>① 说一杯</b>酒名，或者哪儿不对</div>'+
     '<div><b>② 做一遍</b>照着做</div>'+
     '<div><b>③ 记一笔</b>下次只动一样</div>';
   chat.appendChild(steps); atBottom();
@@ -1889,7 +1910,7 @@ async function doDrink(e,p){
     if(t.indexOf('/api')===0){
       var v=t.slice(4).trim();
       if(!v || v==='off'){ setApi(''); add('c-m','好，换回预置的。'); }
-      else { setApi(v); add('c-m','记下了。现在走真模型，断网就退回预置。'); }
+      else { setApi(v); add('c-m','记下了。已经连上在线问答，没网就用本地回答。'); }
       return;
     }
     if(!API){
@@ -2075,6 +2096,530 @@ async function doDrink(e,p){
     ch.onclick=function(){ render(ch.textContent); };
   });
   window.__lookupRender=render;
+})();
+
+</script>
+<style id="v2-design-layer">
+
+/* ===== V2 DESIGN LAYER · 设计令牌 ===== */
+:root{
+  --v2-bg:#0d0b09; --v2-s1:#17130f; --v2-s2:#1f1913; --v2-s3:#2b2219;
+  --v2-line:#372d24; --v2-t1:#f6f0e8; --v2-t2:#cdbfb1; --v2-t3:#ab9c8c;
+  --v2-brand:#e9b668; --v2-ink:#241605;
+  --v2-ok:#9dbb7e; --v2-warn:#e0a35c; --v2-danger:#d97b62;
+  --v2-r1:10px; --v2-r2:14px; --v2-r3:18px; --v2-r4:22px;
+}
+html,body{background:var(--v2-bg)!important}
+body{padding:0!important}
+.phone{background:var(--v2-bg)!important;border:0!important;box-shadow:none!important}
+.body{padding:14px 18px 20px}
+h1{font-size:26px;font-weight:600;line-height:1.32;letter-spacing:.2px;color:var(--v2-t1);margin:10px 0 10px}
+.lede{font-size:13px;line-height:1.72;color:var(--v2-t2)}
+.lede b{color:#f0c98c;font-weight:600}
+.sect{font-size:12px;letter-spacing:.8px;color:var(--v2-t3);margin:24px 0 12px}
+.sect i{background:var(--v2-line)}
+.hidden{display:none!important}
+:focus-visible{outline:2px solid var(--v2-brand);outline-offset:2px;border-radius:4px}
+button,[role="button"]{cursor:pointer;font-family:inherit}
+
+/* 库存选择 */
+.preset{font-size:12px;padding:12px 14px;border-radius:var(--v2-r1);border:1px solid rgba(233,182,104,.42);background:rgba(233,182,104,.08);color:var(--v2-brand);min-height:44px}
+.preset:active{background:rgba(233,182,104,.16)}
+.morebtn{font-size:12px;padding:13px 14px;background:var(--v2-s1);border:1px dashed #41342a;border-radius:var(--v2-r2);color:var(--v2-t2);min-height:46px}
+.grid{gap:10px}
+.sp{background:var(--v2-s1);border:1px solid var(--v2-line);border-radius:var(--v2-r2);padding:12px 4px 10px;min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:background var(--v2-fast),border-color var(--v2-fast)}
+.sp .nm{font-size:13px;line-height:1.3;color:var(--v2-t2)}
+.sp .ct{font-size:12px;margin-top:0;color:var(--v2-t3)}
+.sp.on{border-color:var(--v2-brand);background:rgba(233,182,104,.12)}
+.sp.on .nm{color:var(--v2-t1);font-weight:600}
+.sp.on .ct{color:var(--v2-brand)}
+.sp.on::after{content:"✓";position:absolute;top:3px;right:7px;font-size:11px;color:var(--v2-brand)}
+.sp.aux.on{border-color:rgba(157,187,126,.75);background:rgba(157,187,126,.1)}
+.sp.aux.on .ct{color:var(--v2-ok)}
+.sp.aux.on::after{color:var(--v2-ok)}
+.hint{font-size:12px;color:var(--v2-t3);line-height:1.7}
+.filters{gap:8px;margin:4px 0 16px}
+.chip{font-size:12px;min-height:40px;display:inline-flex;align-items:center;padding:9px 15px;border-radius:999px;border:1px solid var(--v2-line);color:var(--v2-t2);background:var(--v2-s1)}
+.chip.on{background:rgba(233,182,104,.14);border-color:var(--v2-brand);color:#f4cf90;font-weight:600}
+.exbar{font-size:12px;background:var(--v2-s2);border:1px solid var(--v2-line);border-radius:var(--v2-r2);line-height:1.6}
+.exbar .u{color:var(--v2-brand)}
+.exbar.ask{border-color:rgba(233,182,104,.4);background:var(--v2-s3)}
+.exbar.ask .q{font-size:14px;color:var(--v2-t1)}
+.exbar.ask .btn{background:var(--v2-brand);color:var(--v2-ink)}
+.exbar.ask .btn.alt{border-color:var(--v2-brand);color:var(--v2-brand)}
+.exbar.ask .sub{color:var(--v2-t3)}
+
+/* 结果卡片 */
+.card{background:var(--v2-s2);border:1px solid var(--v2-line);border-radius:var(--v2-r4);padding:18px 18px 14px;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.24);overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--base-color,var(--v2-brand))}
+.card.locked{opacity:1;background:var(--v2-s1)}
+.card.locked::before{background:var(--v2-danger)}
+.card:hover{border-color:rgba(233,182,104,.65);transform:translateY(-2px)}
+.card .top{padding-right:38px}
+.card h3{font-size:19px;font-weight:600;letter-spacing:.2px;color:var(--v2-t1)}
+.card .zh{font-size:12px;color:var(--v2-t3)}
+.card .meta{font-size:12px;color:var(--v2-t2)}
+.card .why{font-size:13px;line-height:1.7;color:var(--v2-t2);margin:10px 0 12px}
+.tagLine{font-size:12px;padding:4px 10px;color:#f0c98c;border-color:rgba(233,182,104,.4)}
+.tagLine.lock{color:var(--v2-danger);border-color:rgba(217,123,98,.5);background:rgba(217,123,98,.08)}
+.tagLine.sub{color:var(--v2-ok);border-color:rgba(157,187,126,.5);background:rgba(157,187,126,.08)}
+.row{font-size:12px;line-height:1.6;margin-top:8px}
+.row .k{color:var(--v2-t3);width:32px}
+.row .v{color:var(--v2-t2)}
+.row .v.bad{color:var(--v2-danger)}
+.row .v.ok{color:var(--v2-ok);font-weight:600}
+.x{width:44px;height:44px;top:2px;right:2px;border:0;background:transparent;color:var(--v2-t3);font-size:12px;display:flex;align-items:center;justify-content:center}
+.x::before{content:"";position:absolute;inset:9px;border:1px solid var(--v2-line);border-radius:50%}
+.x:hover{color:var(--v2-danger)}
+.v2-card-cta{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--v2-line);color:var(--v2-brand);font-size:12px;font-weight:600;letter-spacing:.2px}
+.v2-notice{display:flex;gap:9px;align-items:flex-start;background:rgba(224,163,92,.1);border:1px solid rgba(224,163,92,.38);border-radius:var(--v2-r1);padding:10px 12px;margin:0 0 14px;font-size:12px;color:var(--v2-warn);line-height:1.65}
+.v2-notice b{flex:none;color:var(--v2-warn)}
+
+/* 配方详情 */
+.back{font-size:12px;color:var(--v2-t3)}
+#decide .body>.back{display:none}
+.mini{font-size:12px;color:var(--v2-t3);letter-spacing:.4px}
+.ings{gap:8px}
+.ing{font-size:12px;padding:8px 12px;border-radius:var(--v2-r1);border-color:var(--v2-line);color:var(--v2-t2);background:var(--v2-s1)}
+.ing.miss{color:var(--v2-danger);border-color:rgba(217,123,98,.45);background:rgba(217,123,98,.08)}
+.step{padding:13px 0}
+.step .n{width:24px;height:24px;border-color:var(--v2-line);color:var(--v2-t3);font-size:12px}
+.step p{font-size:13px;line-height:1.75;color:var(--v2-t2)}
+.warn{background:var(--v2-s3);border:1px solid rgba(224,163,92,.3);border-radius:var(--v2-r2);padding:14px}
+.warn .t{font-size:12px;color:var(--v2-warn);letter-spacing:.6px}
+.warn p{font-size:13px;color:var(--v2-t2);line-height:1.7}
+footer{padding:12px 18px 14px;background:var(--v2-bg);border-top:1px solid var(--v2-line)}
+.cta{background:var(--v2-brand);color:var(--v2-ink);font-size:15px;font-weight:600;padding:16px;border-radius:var(--v2-r2);min-height:52px;letter-spacing:.3px}
+.cta:disabled{background:var(--v2-s3);color:var(--v2-t3);opacity:1}
+.ghost{background:var(--v2-s1);border:1px solid var(--v2-line);color:var(--v2-t2);font-size:13px;padding:14px;border-radius:var(--v2-r2);min-height:48px}
+
+/* 首页 */
+#home.layer.on{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;text-align:left;gap:14px;padding:22px 18px calc(18px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+.v2-hhead{margin-bottom:2px}
+.v2-hbrand{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;color:var(--v2-t3)}
+.v2-hmark{width:18px;height:18px;color:var(--v2-brand);display:inline-flex}
+.v2-hmark svg,.v2-tile-ico svg,.v2-askbar-ico svg,.v2-tabbar svg,.v2-hero-glass svg{width:100%;height:100%;display:block}
+.v2-hgreet{font-size:12px;color:var(--v2-t3);margin-top:22px}
+.v2-htitle{font-size:28px;font-weight:600;line-height:1.3;margin:6px 0 8px;color:var(--v2-t1);letter-spacing:.2px}
+.v2-hsub{font-size:13px;color:var(--v2-t2);line-height:1.7;margin:0}
+.v2-hero{position:relative;width:100%;text-align:left;background:var(--v2-s2);border:1px solid rgba(233,182,104,.5);border-radius:var(--v2-r4);padding:18px;cursor:pointer;overflow:hidden;color:inherit;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.v2-hero:hover{border-color:var(--v2-brand);transform:translateY(-2px)}
+.v2-hero-badge{display:inline-block;font-size:12px;color:var(--v2-brand);background:rgba(233,182,104,.12);border-radius:999px;padding:4px 10px}
+.v2-hero-title{font-size:20px;font-weight:600;color:var(--v2-t1);margin-top:14px;padding-right:64px;line-height:1.35}
+.v2-hero-desc{font-size:13px;color:var(--v2-t2);line-height:1.7;margin-top:6px;padding-right:64px}
+.v2-hero-state{font-size:12px;color:var(--v2-ok);margin-top:12px}
+.v2-hero-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:var(--v2-brand);color:var(--v2-ink);font-size:13px;font-weight:600;padding:10px 16px;border-radius:999px;min-height:40px}
+.v2-hero-glass{position:absolute;right:12px;top:50px;width:56px;height:84px;color:var(--v2-brand)}
+.v2-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.v2-tile{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;background:var(--v2-s1);border:1px solid var(--v2-line);border-radius:var(--v2-r3);padding:14px;min-height:108px;color:inherit}
+.v2-tile:hover{border-color:var(--v2-brand)}
+.v2-tile-ico{width:28px;height:28px;color:var(--v2-brand);margin-bottom:2px}
+.v2-tile-t{font-size:14px;font-weight:600;color:var(--v2-t1)}
+.v2-tile-d{font-size:12px;color:var(--v2-t2);line-height:1.55}
+.v2-askbar{display:flex;align-items:center;gap:10px;width:100%;background:var(--v2-s1);border:1px solid var(--v2-line);border-radius:var(--v2-r2);padding:12px 14px;min-height:48px;color:var(--v2-t3);font-size:13px;text-align:left}
+.v2-askbar:hover{border-color:var(--v2-brand)}
+.v2-askbar-ico{width:18px;height:18px;color:var(--v2-brand);flex:none}
+.v2-askbar .v2-askbar-txt{flex:1}
+.v2-askbar-go{width:28px;height:28px;border-radius:50%;background:var(--v2-brand);color:var(--v2-ink);display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.v2-tip{font-size:12px;color:#8b8175;line-height:1.75;text-align:center;padding:0 18px;margin-top:30px;letter-spacing:.02em}
+  .v2-hfoot{display:flex;align-items:center;justify-content:center;text-align:center;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--v2-line);font-size:12px;color:var(--v2-t3);line-height:1.6}
+.v2-install{flex:none;background:transparent;border:1px solid var(--v2-line);color:var(--v2-brand);font-size:12px;padding:8px 12px;border-radius:999px;min-height:36px}
+.v2-install:hover{border-color:var(--v2-brand)}
+
+/* 统一顶栏 */
+.v2-appbar{flex:none;display:flex;align-items:center;gap:11px;padding:10px 14px 12px;border-bottom:1px solid var(--v2-line);background:var(--v2-bg)}
+.v2-appbar-back{width:40px;height:40px;border-radius:50%;border:1px solid var(--v2-line);background:var(--v2-s1);color:var(--v2-t1);font-size:22px;line-height:1;flex:none;display:flex;align-items:center;justify-content:center}
+.v2-appbar-back:hover{border-color:var(--v2-brand);color:var(--v2-brand)}
+.v2-appbar-txt{min-width:0;flex:1}
+.v2-appbar-t{font-size:15px;font-weight:600;color:var(--v2-t1);letter-spacing:.2px}
+.v2-appbar-s{font-size:12px;color:var(--v2-t3);margin-top:2px}
+.v2-stepper{display:flex;align-items:center;gap:5px;flex:none}
+.v2-stepper i{width:6px;height:6px;border-radius:50%;background:var(--v2-line)}
+.v2-stepper i.on{background:var(--v2-brand)}
+.v2-stepper span{font-size:12px;color:var(--v2-t3);margin-left:6px;font-variant-numeric:tabular-nums}
+
+/* 底部标签栏 */
+.v2-tabbar{flex:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;background:var(--v2-s1);border-top:1px solid var(--v2-line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+.v2-tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:48px;background:transparent;border:0;color:var(--v2-t3);font-size:12px;line-height:1.2;border-radius:10px;transition:color var(--v2-fast),background var(--v2-fast)}
+.v2-tabbar button svg{width:20px;height:20px}
+.v2-tabbar button[aria-current="page"]{color:var(--v2-brand);background:rgba(233,182,104,.09)}
+.v2-tabbar button:hover{color:var(--v2-t1)}
+  .v2-me-mask{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+  .v2-me-mask.on{opacity:1;pointer-events:auto}
+  .v2-me{position:absolute;top:0;left:0;bottom:0;width:78%;max-width:300px;background:var(--v2-s1);border-right:1px solid var(--v2-line);
+    transform:translateX(-102%);transition:transform .24s cubic-bezier(.3,.8,.3,1);z-index:91;
+    display:flex;flex-direction:column;padding:calc(22px + env(safe-area-inset-top,0px)) 16px calc(14px + env(safe-area-inset-bottom,0px))}
+  .v2-me.on{transform:none}
+  .v2-me{background:#14100d;box-shadow:8px 0 24px rgba(0,0,0,.5)}
+  .v2-me-h{padding:4px 6px 16px;font-size:17px;font-weight:650;color:var(--v2-t1)}
+  .v2-me-row{display:flex;align-items:center;gap:12px;width:100%;padding:14px 6px;background:none;border:0;
+    border-bottom:1px solid var(--v2-line);color:var(--v2-t1);font-size:14px;text-align:left;cursor:pointer}
+  .v2-me-row .ico{width:20px;height:20px;color:var(--v2-brand);flex:none}
+  .v2-me-row .txt{flex:1;min-width:0}
+  .v2-me-row .sub{display:block;font-size:11.5px;color:var(--v2-t3);margin-top:3px}
+  .v2-me-row .go{color:var(--v2-t3);font-size:16px}
+  .v2-me-foot{margin-top:auto;font-size:11.5px;color:var(--v2-t3);line-height:1.8;padding:14px 6px 0}
+
+/* 对话 / 解疑 / 训练页头部统一 */
+#ask .c-head,#lookup .c-head{padding:12px 14px;background:var(--v2-bg);border-bottom:1px solid var(--v2-line);gap:12px}
+#ask .c-back,#lookup .c-back{width:40px;height:40px;border-color:var(--v2-line);background:var(--v2-s1);color:var(--v2-t1);font-size:22px}
+#ask .c-t,#lookup .c-t{font-size:15px;font-weight:600;color:var(--v2-t1)}
+#ask .c-s,#lookup .c-s{font-size:12px;color:var(--v2-t3)}
+#practice .exit{left:14px;right:auto;width:40px;height:40px;background:var(--v2-s1);border-color:var(--v2-line);color:var(--v2-t1)}
+#practice .topbar{padding:14px 18px 14px 64px;background:var(--v2-bg);border-bottom:1px solid var(--v2-line)}
+#practice .who .n{font-size:14px;color:var(--v2-t1)}
+#practice .who .s,#practice .hero .hs,#practice .steps div,#practice .sys,#practice .setup .sk{color:var(--v2-t3);font-size:12px}
+#practice .hero .ht,#ask .c-hero h2,#lookup .c-hero h2{font-size:24px;color:var(--v2-t1)}
+#ask .c-hero p,#lookup .c-hero p{font-size:13px;color:var(--v2-t2)}
+#practice .msg,#ask .c-m,#ask .c-u{font-size:14px;line-height:1.75}
+#practice .bot{background:var(--v2-s2);color:var(--v2-t1);border-color:var(--v2-line)}
+#practice .me,#ask .c-u{background:var(--v2-brand);color:var(--v2-ink)}
+#practice .bot .hl{color:var(--v2-brand)}
+#practice .chip{font-size:12px;min-height:40px;border-color:rgba(233,182,104,.42);color:#f0c98c;background:rgba(233,182,104,.07)}
+#practice .chip.sel{background:rgba(233,182,104,.2);color:#f6d79c;border-color:var(--v2-brand)}
+#practice .timerbox{border-color:rgba(233,182,104,.35);background:var(--v2-s2)}
+#practice .timerbox .c{color:var(--v2-brand)}
+#practice .timerbox.done .c{color:var(--v2-ok)}
+#practice .composer,#ask .c-compose,#lookup .l-compose{background:var(--v2-bg);border-top:1px solid var(--v2-line);padding-bottom:14px}
+#practice .composer input,#ask .c-compose input,#lookup .l-compose input{background:var(--v2-s1);border-color:var(--v2-line);color:var(--v2-t1);font-size:14px}
+#practice .send,#ask .c-send,#lookup .l-send,#practice .timerbox button{background:var(--v2-brand);color:var(--v2-ink)}
+#practice .addbtn{background:var(--v2-s1);border-color:var(--v2-line);color:var(--v2-t2)}
+#practice .rec{background:var(--v2-s1);border-color:rgba(233,182,104,.35)}
+#practice .picker{background:var(--v2-s1)}
+#practice .modal .mbox{background:var(--v2-s1);border-color:var(--v2-line)}
+#practice #myname,#practice .mrow select,#practice .mrow input{background:var(--v2-s2);border-color:var(--v2-line);color:var(--v2-t1);font-size:13px}
+#practice .mgoal{color:var(--v2-brand);border-color:rgba(233,182,104,.3);background:rgba(233,182,104,.08)}
+#practice .msave{background:var(--v2-brand);color:var(--v2-ink)}
+#ask .c-chip,#lookup .l-chip{font-size:12px;min-height:36px;border-color:var(--v2-line);color:var(--v2-t2);background:var(--v2-s1)}
+#lookup .cs{background:var(--v2-s1);border-color:var(--v2-line)}
+#lookup .sym{background:rgba(233,182,104,.08);border-color:rgba(233,182,104,.4)}
+#lookup .sym .n{color:#f0c98c}
+#lookup .cs .no{color:var(--v2-brand)}
+#insthint{display:none!important}
+#instsheet .box{background:var(--v2-s1);border-color:var(--v2-line)}
+#instsheet .box button{background:var(--v2-brand);color:var(--v2-ink)}
+
+@media (min-width:900px){
+  .phone{max-width:480px!important;margin:0 auto;border-left:1px solid var(--v2-line)!important;border-right:1px solid var(--v2-line)!important}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+</style>
+<script id="v2-enhance">
+
+(function(){
+  'use strict';
+  var I = {
+    me:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>',
+    glass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9z"/><path d="M12 13v7"/><path d="M8 21h8"/></svg>',
+    home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>',
+    shaker:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12"/><path d="M7 3l1 5h8l1-5"/><path d="M8 8l-2 12h12L16 8"/></svg>',
+    search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>',
+    chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-8 8H5l2-3a8 8 0 1 1 13-5z"/></svg>',
+    bigGlass:'<svg viewBox="0 0 56 84" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h48L28 46z"/><path d="M11 15h34L28 41z" fill="currentColor" fill-opacity=".28" stroke="none"/><path d="M28 46v30"/><path d="M16 78h24"/><path d="M38 4l6-3"/></svg>'
+  };
+
+  /* 1. 首页重排：一个主任务 + 两个次任务 + 一个提问入口 */
+  var home = document.getElementById('home');
+  if(home){
+    home.classList.add('v2-home');
+    home.innerHTML =
+      '<div class="v2-hhead">'+
+        '<div class="v2-hbrand"><span class="v2-hmark">'+I.glass+'</span><span>COCKTAIL ASSISTANT</span></div>'+
+      '</div>'+
+      '<button class="v2-hero" type="button" onclick="openDecide()">'+
+        '<span class="v2-hero-badge">今夜酒单</span>'+
+        '<div class="v2-hero-title">有什么酒，就做什么酒</div>'+
+        '<div class="v2-hero-desc">勾基酒和辅料，给你三杯马上能做的。</div>'+
+        '<div class="v2-hero-state" id="v2State">读取中…</div>'+
+        '<div class="v2-hero-cta"><span>开始挑酒</span><span>→</span></div>'+
+        '<div class="v2-hero-glass">'+I.bigGlass+'</div>'+
+      '</button>'+
+      '<div class="v2-tiles">'+
+        '<button class="v2-tile" type="button" onclick="openPractice()"><span class="v2-tile-ico">'+I.shaker+'</span><span class="v2-tile-t">练一杯酒</span><span class="v2-tile-d">一杯做三遍，只动一处</span></button>'+
+        '<button class="v2-tile" type="button" onclick="openLookup()"><span class="v2-tile-ico">'+I.search+'</span><span class="v2-tile-t">解疑</span><span class="v2-tile-d">太甜、没气泡，按症状查</span></button>'+
+      '</div>'+
+      '<button class="v2-askbar" type="button" onclick="openAsk()"><span class="v2-askbar-ico">'+I.chat+'</span><span class="v2-askbar-txt">问一句：金酒加柠檬，能做什么？</span><span class="v2-askbar-go">↑</span></button>'+
+      '<div class="v2-tip" id="v2Tip">今晚一句 · 先定水，再选冰。</div>'+
+      '<div class="v2-hfoot"><span>离线可用 · 配方与训练记录留在这台设备上</span></div>';
+  }
+
+  /* 2. 常驻底部标签栏（作为 flex 子项，不遮挡输入区） */
+  var tabs = [['home','首页',I.home],['decide','酒单',I.glass],['ask','问一句',I.chat]];
+  var nav = document.createElement('nav');
+  nav.className = 'v2-tabbar'; nav.id = 'v2Tabbar';
+  nav.setAttribute('aria-label','主导航');
+  nav.innerHTML = tabs.map(function(t){
+    return '<button type="button" data-layer="'+t[0]+'" aria-label="'+t[1]+'"><span style="width:20px;height:20px;display:block">'+t[2]+'</span><span>'+t[1]+'</span></button>';
+  }).join('');
+  var phone = document.querySelector('.phone');
+  if(phone) phone.appendChild(nav);
+
+  var meMask = document.createElement('div'); meMask.className = 'v2-me-mask';
+  var me = document.createElement('div'); me.className = 'v2-me'; me.id = 'v2Me';
+  me.innerHTML =
+    '<div class="v2-me-h">我的</div>'+
+    '<button class="v2-me-row" type="button" onclick="openPractice();closeMe();">'+
+      '<span class="ico">'+I.shaker+'</span>'+
+      '<span class="txt">练一杯酒<span class="sub">一杯做三遍，只动一处</span></span>'+
+      '<span class="go">›</span></button>'+
+    '<button class="v2-me-row" type="button" onclick="openLookup();closeMe();">'+
+      '<span class="ico">'+I.search+'</span>'+
+      '<span class="txt">解疑<span class="sub">太甜、没气泡，按症状查</span></span>'+
+      '<span class="go">›</span></button>'+
+    '<button class="v2-me-row" type="button" onclick="showMeAbout()">'+
+      '<span class="ico">'+I.glass+'</span>'+
+      '<span class="txt">关于<span class="sub">版本 1.0 · 离线可用</span></span>'+
+      '<span class="go">›</span></button>'+
+    '<div class="v2-me-foot" id="v2AboutTxt">配方和记录只在这台设备上。</div>';
+  if(phone){ phone.appendChild(meMask); phone.appendChild(me); }
+  meMask.addEventListener('click', closeMe);
+  function openMe(){ meMask.classList.add('on'); me.classList.add('on'); }
+  function closeMe(){ meMask.classList.remove('on'); me.classList.remove('on'); }
+  function showMeAbout(){
+    var t = document.getElementById('v2AboutTxt');
+    if(t) t.textContent = '鸡尾酒助手 1.0 · 离线优先。59 杯配方、44 条判例、练习参数都在本地。联网时可接在线问答。';
+  }
+  window.openMe = openMe; window.closeMe = closeMe; window.showMeAbout = showMeAbout;
+
+  /* 从屏幕左缘往右滑打开，面板上往左滑关闭 */
+  var _sx = 0, _sy = 0;
+  document.addEventListener('touchstart', function(e){
+    var t = e.touches[0]; _sx = t.clientX; _sy = t.clientY;
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    var t = e.changedTouches[0];
+    var dx = t.clientX - _sx, dy = t.clientY - _sy;
+    if(Math.abs(dy) > 60) return;
+    if(!me.classList.contains('on') && _sx < 30 && dx > 50) openMe();
+    else if(me.classList.contains('on') && dx < -50) closeMe();
+  }, {passive:true});
+  nav.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var id = b.dataset.layer;
+      if(id === 'decide'){ closeMe(); openDecide(); }
+      else if(id === 'me') openMe();
+      else { closeMe(); show(id); }
+    });
+  });
+
+  /* 3. 酒单流程统一顶栏 + 步骤指示 */
+  var decide = document.getElementById('decide');
+  var bar = document.createElement('div');
+  bar.className = 'v2-appbar'; bar.id = 'v2Appbar';
+  bar.innerHTML = '<button class="v2-appbar-back" type="button" aria-label="返回">‹</button>'+
+    '<div class="v2-appbar-txt"><div class="v2-appbar-t">今夜酒单</div><div class="v2-appbar-s">勾库存 → 挑三杯 → 看配方</div></div>'+
+    '<div class="v2-stepper" id="v2Steps"><i class="on"></i><i></i><i></i><span id="v2StepNum">1 / 3</span></div>';
+  if(decide) decide.insertBefore(bar, decide.firstChild);
+  bar.querySelector('.v2-appbar-back').addEventListener('click',function(){
+    var n = currentScreen();
+    if(n > 1) go(n-1); else show('home');
+  });
+
+  function currentScreen(){
+    var e = document.querySelector('#decide .screen.on');
+    return e ? parseInt(e.id.replace('s',''),10) : 1;
+  }
+  function updateBar(n){
+    document.querySelectorAll('#v2Steps i').forEach(function(el,i){ el.classList.toggle('on', i < n); });
+    var s = document.getElementById('v2StepNum');
+    if(s) s.textContent = n + ' / 3';
+  }
+  function updateNav(id){
+    var map = {home:'home',decide:'decide',practice:'practice',ask:'ask'};
+    var target = map[id] || '';
+    document.querySelectorAll('#v2Tabbar button').forEach(function(b){
+      if(target && b.dataset.layer === target) b.setAttribute('aria-current','page');
+      else b.removeAttribute('aria-current');
+    });
+  }
+  function updateHomeState(){
+    var el = document.getElementById('v2State');
+    if(!el) return;
+    try{
+      var n = state.sp.size, a = state.aux.size, c = count();
+      el.textContent = n ? ('手头：'+n+' 瓶基酒 · '+a+' 样辅料 · 现在能做 '+c+' 杯')
+                         : '手头还是空的，先从勾一瓶基酒开始';
+      el.style.color = n ? 'var(--v2-ok)' : 'var(--v2-t3)';
+    }catch(e){ el.textContent = '离线可用 · 配方留在这台设备上'; }
+  }
+
+  /* 4. 结果卡片：基酒身份色带、状态色修正、明确的主操作 */
+  var BASE_COLOR = {gin:'#9fc4bd',rum:'#e6c07a',bourbon:'#d99a5c',rye:'#c97f5e',
+                    vodka:'#b9c8d6',tequila:'#c3cf8e',mezcal:'#b7a37e',brandy:'#b9755c'};
+  function baseOf(title){
+    try{
+      for(var k in SP){
+        if(SP[k].cards.some(function(c){ return c.t === title; })) return k;
+      }
+    }catch(e){}
+    return null;
+  }
+  function enhanceCards(){
+    var cards = document.querySelectorAll('#cards .card');
+    var current = [];
+    try{ current = list(); }catch(e){}
+    cards.forEach(function(el,i){
+      var key = current[i] ? baseOf(current[i].t) : null;
+      el.style.setProperty('--base-color', BASE_COLOR[key] || '#e9b668');
+      el.querySelectorAll('.row .v').forEach(function(v){
+        var t = v.textContent.trim();
+        if(t === '齐了' || t.indexOf('齐了') === 0){
+          v.classList.remove('bad'); v.classList.add('ok');
+        }
+      });
+      if(!el.querySelector('.v2-card-cta')){
+        var cta = document.createElement('div');
+        cta.className = 'v2-card-cta';
+        cta.innerHTML = '<span>查看配方与做法</span><span>→</span>';
+        el.appendChild(cta);
+      }
+    });
+    var old = document.getElementById('v2Notice');
+    if(old) old.remove();
+    try{
+      if(state.maxTime < 99){
+        var over = 0;
+        cards.forEach(function(el){
+          var m = el.querySelector('.meta');
+          if(!m) return;
+          var v = parseInt(m.textContent,10);
+          if(!isNaN(v) && v > state.maxTime) over++;
+        });
+        if(over > 0){
+          var note = document.createElement('div');
+          note.className = 'v2-notice'; note.id = 'v2Notice';
+          note.innerHTML = '<b>!</b><span>「'+state.maxTime+' 分钟内」合适的不足两杯，已自动放宽；下面 '+over+' 杯超出了这个时间。</span>';
+          var holder = document.getElementById('cards');
+          if(holder && holder.parentNode) holder.parentNode.insertBefore(note, holder);
+        }
+      }
+    }catch(e){}
+  }
+
+  /* 5. 给非语义元素补键盘可达性 */
+  function a11y(){
+    document.querySelectorAll('[onclick]:not(button):not(input):not([role])').forEach(function(el){
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      if(!el.getAttribute('aria-label')){
+        el.setAttribute('aria-label', (el.textContent||'').trim().slice(0,30) || '操作');
+      }
+      el.addEventListener('keydown',function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); el.click(); }
+      });
+    });
+  }
+
+  /* 6. 包装原有全局函数，保持全部业务逻辑不变 */
+  var _show = window.show, _go = window.go, _rc = window.renderCards, _rg = window.renderGrids;
+  window.show = function(id){
+    _show(id);
+    updateNav(id);
+    updateBar(currentScreen());
+    if(id === 'home') updateHomeState();
+  };
+  window.go = function(n){
+    _go(n);
+    updateBar(n);
+    a11y();
+  };
+  window.renderCards = function(){
+    _rc();
+    enhanceCards();
+    a11y();
+  };
+  window.renderGrids = function(){
+    _rg();
+    a11y();
+  };
+
+  updateNav('home');
+  updateBar(1);
+  updateHomeState();
+  a11y();
+})();
+
+</script>
+<style id="v2-plus">
+/* V2+ 追加层：宽屏布局与手感微调。由 build_all.py 注入，幂等。 */
+
+/* 1. 宽屏（≥900px）结果卡两列，桌面不用滚半天 */
+@media (min-width: 900px) {
+  #cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  #cards .card { margin: 0; }
+  #cards .card:only-child { grid-column: 1 / -1; }
+}
+
+/* 2. 关闭按钮：圆形内描边，hover 才显红，平时不抢眼 */
+.card .x {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.card .x svg { width: 14px; height: 14px; display: block; }
+.card .x:hover { background: rgba(217, 123, 98, .14); color: var(--v2-danger, #d97b62); }
+
+/* 3. 卡片抬升更轻，键盘焦点更清楚 */
+.card { transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.card:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, .28); }
+.card:focus-visible { outline: 2px solid var(--v2-brand, #e9b668); outline-offset: 2px; }
+
+/* 4. 底部 Tab 与内容之间留一点呼吸，避免卡片贴住 */
+.phone > .tabbar, .tabbar { backdrop-filter: blur(8px); }
+
+/* 5. 长文案行高在窄屏更松一点，读起来不挤 */
+@media (max-width: 420px) {
+  .card .why { line-height: 1.7; }
+}
+/* 6. 双列时标题与右侧时间会挤，给标题留出确定宽度 */
+/* 双列时把时间挪到标题下一行，标题就能占满宽度 */
+@media (min-width: 900px) {
+  #cards .card .top { flex-wrap: wrap; row-gap: 2px; }
+  #cards .card .tt { flex: 1 1 100%; min-width: 0; }
+  #cards .card .meta { flex: 0 0 100%; order: 3; color: #8d8175; }
+}
+
+/* 7. 桌面下手机壳再高一截，卡片不贴住底栏 */
+@media (min-width: 900px) {
+  .phone { height: min(920px, calc(100vh - 36px)); }
+}
+
+</style>
+<script id="v2-plus-js">
+// V2+ 追加层：只做视觉增强，不碰业务状态。由 build_all.py 注入，幂等。
+(function () {
+  'use strict';
+
+  var X_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+
+  // 把结果卡右上角的字符 ✕ 换成线性图标（V2 生成的卡片会重新渲染，所以用观察器兜底）
+  function iconize(root) {
+    var nodes = (root || document).querySelectorAll('.card .x');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.getAttribute('data-icon') === 'x') continue;
+      el.setAttribute('data-icon', 'x');
+      el.innerHTML = X_SVG;
+      if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', '不要这杯');
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+    }
+  }
+
+  function boot() {
+    iconize(document);
+    var cards = document.getElementById('cards');
+    if (cards && window.MutationObserver) {
+      new MutationObserver(function () { iconize(cards); })
+        .observe(cards, { childList: true, subtree: true });
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
 
 </script>
